@@ -9,12 +9,18 @@ void checkAccuracy()
 {
     std::cout << "\nПроверка точности\n";
 
-    const double epsilons[] = { 1e-2, 1e-3 };
+    const double epsilons[] =
+    {
+        1e-2,
+        1e-3
+    };
 
     for (double epsilon : epsilons)
     {
         long long n = 1;
-        double previous = integrateSingleThread(n);
+
+        double previous =
+            integrateSingleThread(n);
 
         while (true)
         {
@@ -28,8 +34,11 @@ void checkAccuracy()
 
             if (error < epsilon)
             {
-                std::cout << std::fixed
-                    << std::setprecision(10)
+                std::cout
+                    << std::fixed
+                    << std::setprecision(10);
+
+                std::cout
                     << "epsilon = "
                     << epsilon
                     << ", n = "

@@ -14,7 +14,9 @@ void stdThreadWorker(
     double h = (B - A) / n;
     double sum = 0.0;
 
-    for (long long i = start; i <= end; ++i)
+    for (long long i = start;
+        i <= end;
+        ++i)
     {
         double x = A + i * h;
         sum += function(x);
@@ -23,10 +25,15 @@ void stdThreadWorker(
     partialSum = sum;
 }
 
-double integrateStdThread(long long n, int threadCount)
+double integrateStdThread(
+    long long n,
+    int threadCount)
 {
     std::vector<std::thread> threads;
-    std::vector<double> partialSums(threadCount, 0.0);
+    std::vector<double> partialSums(
+        threadCount,
+        0.0
+    );
 
     long long base = n / threadCount;
     long long remainder = n % threadCount;
@@ -37,7 +44,9 @@ double integrateStdThread(long long n, int threadCount)
         long long size = base;
 
         if (i < remainder)
+        {
             ++size;
+        }
 
         long long end = start + size - 1;
 
@@ -53,12 +62,16 @@ double integrateStdThread(long long n, int threadCount)
     }
 
     for (auto& t : threads)
+    {
         t.join();
+    }
 
     double totalSum = 0.0;
 
     for (double sum : partialSums)
+    {
         totalSum += sum;
+    }
 
     double h = (B - A) / n;
 

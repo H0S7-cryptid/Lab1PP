@@ -16,7 +16,8 @@ struct PThreadData
 
 void* pthreadWorker(void* arg)
 {
-    PThreadData* data = static_cast<PThreadData*>(arg);
+    PThreadData* data =
+        static_cast<PThreadData*>(arg);
 
     double h = (B - A) / data->n;
     double sum = 0.0;
@@ -34,7 +35,9 @@ void* pthreadWorker(void* arg)
     return nullptr;
 }
 
-double integratePThread(long long n, int threadCount)
+double integratePThread(
+    long long n,
+    int threadCount)
 {
     std::vector<pthread_t> threads(threadCount);
     std::vector<PThreadData> data(threadCount);
@@ -48,7 +51,9 @@ double integratePThread(long long n, int threadCount)
         long long size = base;
 
         if (i < remainder)
+        {
             ++size;
+        }
 
         data[i].start = start;
         data[i].end = start + size - 1;
@@ -69,7 +74,11 @@ double integratePThread(long long n, int threadCount)
 
     for (int i = 0; i < threadCount; ++i)
     {
-        pthread_join(threads[i], nullptr);
+        pthread_join(
+            threads[i],
+            nullptr
+        );
+
         totalSum += data[i].partialSum;
     }
 
